@@ -51,13 +51,13 @@ void remove_all(char *str, char to_remove) {
 	char *read = str;
 	char *write = str;
 	while (*read) {
-		if (*read == to_remove) {
-			read++;
+		if (*read != to_remove) {
 			*write = *read;
+			++write;
 		}
-		read++;
-		write++;
+		++read;
 	}
+	*write = '\0';
 }
 
 //opens process *cmd and stores output in *output
@@ -111,6 +111,10 @@ void getsigcmds(int signal)
 void setupsignals()
 {
 	struct sigaction sa;
+
+	for(int i = SIGRTMIN; i <= SIGRTMAX; i++)
+		signal(i, SIG_IGN);
+
 	for(int i = 0; i < LENGTH(blocks); i++)
 	{
 		if (blocks[i].signal > 0)
@@ -193,6 +197,7 @@ void sighandler(int signum)
 void buttonhandler(int sig, siginfo_t *si, void *ucontext)
 {
 	char button[2] = {'0' + si->si_value.sival_int & 0xff, '\0'};
+	pid_t process_id = getpid();
 	sig = si->si_value.sival_int >> 8;
 	if (fork() == 0)
 	{
@@ -203,14 +208,14 @@ void buttonhandler(int sig, siginfo_t *si, void *ucontext)
 			if (current->signal == sig)
 				break;
 		}
-		char *command[] = { "/bin/sh", "-c", current->command, NULL };
+		char shcmd[1024];
+		sprintf(shcmd,"%s && kill -%d %d",current->command, current->signal+34,process_id);
+		char *command[] = { "/bin/sh", "-c", shcmd, NULL };
 		setenv("BLOCK_BUTTON", button, 1);
 		setsid();
 		execvp(command[0], command);
 		exit(EXIT_SUCCESS);
 	}
-	getsigcmds(sig);
-	writestatus();
 }
 
 #endif
