@@ -11,7 +11,7 @@ static const Block blocks[] = {
     {"",	"packet_loss 1m" ,                  5,          27},
     {"",	"packet_loss 5m" ,                  10,         28},
     {"",	"packet_loss 15m",                  60,         29},
-    {"",	"nettraf",                          5,          16},
+    {"",	"nettraf 5",                        5,          16},
     {"",	"effects_preset",                   0,          19},
     {"",	"volume_sink $SINK0",               0,          9},
     {"",	"volume_sink $SINK1",               0,          10},
