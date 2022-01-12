@@ -17,15 +17,15 @@ static const Block blocks[] = {
     {"",	"volume_sink $SINK1",               0,          10},
     {"",	"packupd",                          0,          8},
     {"",	"clock",                            60,         1},
-    {"",	"printf ';' ",                      0,          26},
-    {"",	"printf '^v^^C3^' ",                0,          31},
-    {"",	"rate_top 3 gain 24 ",              5,          24},
-    {"",	"rate_top 3 lose 25 ",              5,          25},
-    {"",	"s2d -P ^t^ ",                      0,          32},
-    {"",	"rate_stat 21 _0 ",                 300,        21},
-    {"",	"rate_stat 22 _1 ",                 300,        22},
+    {"",	"printf '%s' ';'",                  0,          26},
+    // {"",	"printf '%s' '^v^^C3^'",            0,          31},
+    {"",	"rate_top 3 gain 24",               5,          24},
+    {"",	"rate_top 3 lose 25",               5,          25},
+    // {"",	"printf '%s' '^t^'",                0,          32},
+    {"",	"rate_stat 21 _0",                  300,        21},
+    {"",	"rate_stat 22 _1",                  300,        22},
     {"",	"stats",                            1800,       34},
-    {"",	"stext '' 0 ",                      10,         33},
+    {"",	"stext '' 0",                       10,         33},
 };
 
 //sets delimeter between status commands. NULL character ('\0') means no delimeter.
@@ -33,5 +33,4 @@ static char *delim = "  ";
 
 // Have dwmblocks automatically recompile and run when you edit this file in
 // vim with the following line in your vimrc/init.vim:
-
 // autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
