@@ -4,6 +4,7 @@ static const Block blocks[] = {
     /*Icon  Command                     Update Interval Update Signal*/
     {"",	"music-web",                        0,          12},
     {"",	"music bar",                        0,          11},
+    {"",	"[ -r /tmp/recicon ] && cat /tmp/recicon", 0,   6},
     {"",	"loadavg",                          10,         23},
     {"",	"cpu",                              10,         18},
     {"",	"memory",                           10,         14},
@@ -19,8 +20,8 @@ static const Block blocks[] = {
     {"",	"clock",                            60,         1},
     {"",	"printf '%s' ';'",                  0,          26},
     // {"",	"printf '%s' '^v^^C3^'",            0,          31},
-    {"",	"rate_top 3 gain 24",               5,          24},
-    {"",	"rate_top 3 lose 25",               5,          25},
+    {"",	"rate_top 24 4 gain",               5,          24},
+    {"",	"rate_top 25 4 lose",               5,          25},
     // {"",	"printf '%s' '^t^'",                0,          32},
     {"",	"rate_stat 21 _0",                  300,        21},
     {"",	"rate_stat 22 _1",                  300,        22},
